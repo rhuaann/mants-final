@@ -1,0 +1,187 @@
+{% load static %}
+{% load active_link_tags %}
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      {% block title %}
+
+      {% endblock %}
+    </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Favicon -->
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet" />
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="container-xxl bg-white p-0">
+      <!-- Navbar & Hero Start -->
+      <div class="container-xxl position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+          <a href="index.html" class="navbar-brand p-0">
+            <h1 class="m-0"><i class="bi bi-music-note"></i>Mants</h1>
+            <!-- <img src="img/logo.png" alt="Logo"> -->
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="fa fa-bars"></span></button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+              <a href="{% url 'home' %}" class="nav-item nav-link {% active_link 'home' 'active' %}">Início</a>
+              <a href="about.html" class="nav-item nav-link">About</a>
+              <a href="service.html" class="nav-item nav-link">Service</a>
+              <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+            <a href="" class="py-1 px-1 ms-lg-5"><img class="circle" src="{% static 'img/user.png' %}" width="50px" height="50px" alt="" /></a>
+          </div>
+        </nav>
+      </div>
+      <!-- Navbar & Hero End -->
+
+      <main class="">
+        {% if messages %}
+          {% include 'layouts/messages.html' %}
+        {% endif %}
+
+        {% block alerts %}
+
+        {% endblock %}
+
+        {% block content %}
+
+        {% endblock %}
+      </main>
+
+      <!-- Back to Top -->
+      <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html> {% endcomment %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>
+    {% block title %}
+
+    {% endblock %}
+  </title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    body{
+      background-color: #E4F6F2; !important
+    }
+  </style>
+</head>
+
+<body>
+
+	<div class="wrapper d-flex align-items-stretch">
+		<nav id="sidebar">
+			{% comment %} <div class="custom-menu">
+				<button type="button" id="sidebarCollapse" class="btn btn-primary" style="background-color: #008667; border: none;">
+					<i class="fa fa-bars" ></i>
+					<span class="sr-only"></span>
+				</button>
+			</div> {% endcomment %}
+			<div class="p-4 pt-5">
+				<h1><a href="{% url 'home' %}" class="logo"><i class="fa fa-music"></i>Mants</a></h1>
+				<ul class="list-unstyled components mb-5">
+					<li class="{% active_link 'home' 'active' strict=True %}">
+						<a href="{% url 'home' %}"><strong>Início</strong>
+            </a>
+					</li>
+					<li class="{% active_link 'instrumento_listar' 'active' %}">
+						<a href="{% url 'instrumento_listar' %}"><strong>Instrumentos</strong></a>
+					</li>
+          <li class="{% active_link 'reserva_listar' 'active' %}">
+						<a href="{% url 'reserva_listar' %}"><strong>Reservas</strong></a>
+					</li>
+					<li>
+						<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+					</li>
+					<li>
+						<a href="#">Portfolio</a>
+					</li>
+					<li>
+						<a href="#">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<!-- Page Content  -->
+		<div id="content" class="p-4 p-md-5 pt-5">
+
+      {% if messages %}
+          {% include 'layouts/messages.html' %}
+        {% endif %}
+
+        {% block alerts %}
+
+        {% endblock %}
+
+        {% block content %}
+
+        {% endblock %}
+	</div>
+
+  {% block javascript %}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+      <script>
+        $(document).ready(function () {
+          $('.data').mask('0000-00-00', { reverse: true })
+        })
+      </script>
+    {% endblock %}
+
+</body>
+
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/popper.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+
+</html>

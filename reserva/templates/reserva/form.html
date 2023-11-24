@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}
+  Cadastrar Reserva
+{% endblock %}
+
+{% block content %}
+<div class="mt-2">
+    <form method="post" >
+        {% csrf_token %}
+        <section class='container' >
+            <div class='row col-12 mb-4'>
+                <div class='col-12'>
+                    <h5><strong style="">Cadastrar nova reserva</strong></h5>
+                    <hr>
+                </div>
+            </div>
+
+            {% comment %} <div class="row col-12 mb-2 mt-2">
+                <div class='col-12'>
+                    <div class="form-group">
+                        <label for="nome" class='mb-0'><strong style="">Usuário</strong></label>
+                        <div class="caixa">
+                            {{form.user}}
+                        </div>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+
+            <div class="row col-12 mb-2 mt-2">
+                <div class='col-12'>
+                    <div class="form-group">
+                        <label for="nome" class='mb-0'><strong style="">Instrumento</strong></label>
+                        <div class="caixa">
+                            {{form.instrumento}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-12 mb-2 mt-2">
+                <div class='col-12'>
+                    <div class="form-group">
+                        <label for="nome" class='mb-0'><strong style="">Data da Reserva</strong></label>
+                        <div class="caixa">
+                            {{form.data_reserva}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-12 mb-2 mt-2">
+                <div class='col-12'>
+                    <div class="form-group">
+                        <label for="nome" class='mb-0'><strong style="">Situação</strong></label>
+                        <div class="caixa">
+                            {{form.status}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row col-12 mb-2 mt-2 mr-5">
+                <div class='col-12 mb-0 d-flex justify-content-end '>
+                    <button type="submit" class="btn btn-primary" style="border-radius: 50px; font-size: 12px;"><strong>SALVAR</strong></button>
+                </div>
+            </div>
+        </section>
+
+    </form>
+</div>
+{% endblock %}

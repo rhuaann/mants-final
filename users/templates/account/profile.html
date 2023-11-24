@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Perfil
+{% endblock %}
+
+{% block content %}
+  {% comment %} <div class="mt-5">
+    <h2>Perfil</h2>
+    <div class="d-flex justify-content-end" style="margin-top: 400px">
+        <a style='color:white' href="{% url 'account_logout' %}" class="btn btn-primary">Sair</a>
+    </div>
+  </div> {% endcomment %}
+
+  <div class='p-3'>
+    <div class="mt-2 ">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="mt-2">
+                <h3 class="" style=""><strong>Rhuan Lucas Targino Moreira
+
+                </strong></h3>
+                <p><strong>Administrador</strong></p>
+            </div>
+        </div>
+
+        <div class='row col-12 mb-4'>
+            <div class='col-12'>
+                <h5><strong style="">Dados Gerais</strong></h5>
+            </div>
+        </div>
+
+        <div class="row col-12 d-flex justify-content-center align-items-center mb-4">
+            <div class="col-4">
+                <div class="circle2">
+                    <img class="img img-fluid" src="">
+                </div>
+            </div>
+            <div class="col-8 ">
+                <div class="row col-12 mb-5">
+                    <div class="col-6 m-auto">
+                        <div><strong style="">Nome:</strong>
+                            <p class="">
+                            </p>
+                            <hr style="font-size: 40px;">
+                        </div>
+                    </div>
+                    <div class="col-6">
+
+                        <div><strong style="">CPF:</strong>
+                            <p class="">
+                            </p>
+                            <hr style="font-size: 40px;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row col-12">
+                    <div class="col-6">
+                        <div><strong style="">Telefone:</strong>
+                            <p class="">
+                            </p>
+                            <hr style="font-size: 40px;">
+                        </div>
+                    </div>
+                    <div class="col-6">
+
+                        <div><strong style="">Email:</strong>
+                            <p class="">
+                            </p>
+                            <hr style="font-size: 40px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='row col-12 mb-4'>
+            <div class='col-12'>
+                <h5><strong style="">Endereço</strong></h5>
+            </div>
+        </div>
+
+        <div class="row col-12 d-flex justify-content-between mb-4 ml-3">
+            <div class="row col-12">
+                <div class="col-6">
+                    <div><strong style="">CEP:</strong>
+                        <p class="">
+                        </p>
+                        <hr style="font-size: 40px;">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div><strong style="">Logradouro:</strong>
+                        <p class="">
+                        </p>
+                        <hr style="font-size: 40px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-12">
+                <div class="col-6">
+                    <div><strong style="">Número:</strong>
+                        <p class="">
+                        </p>
+                        <hr style="font-size: 40px;">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div><strong style="">Complemento:</strong>
+                        <p class=""> 
+                        </p>
+                        <hr style="font-size: 40px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-12">
+                <div class="col-6">
+                    <div><strong style="">Bairro:</strong>
+                        <p class="">
+                        </p>
+                        <hr style="font-size: 40px;">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div><strong style="">Cidade:</strong>
+                        <p class=""> 
+                        </p>
+                        <hr style="font-size: 40px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end align-items-center mb-2">
+            <div>
+                <a href="#" class="btn bg-secondary text-white" id="bt1"><strong>ALTERAR SENHA</strong></a>
+                <a href="{% url 'logout' %}" class="btn btn-primary text-white" id="bt1"><strong>SAIR</strong></a>
+            </div>
+        </div>
+{% endblock %}

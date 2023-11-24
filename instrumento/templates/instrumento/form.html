@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}
+  Cadastrar Instrumento
+{% endblock %}
+
+{% block content %}
+<div class="mt-2">
+    <form method="post" >
+        {% csrf_token %}
+        <section class='container' >
+            <div class='row col-12 mb-4'>
+                <div class='col-12'>
+                    <h5><strong style="">Cadastrar novo instrumento</strong></h5>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="row col-12 mb-2 mt-2">
+                <div class='col-12'>
+                    <div class="form-group">
+                        <label for="nome" class='mb-0'><strong style="">Nome</strong></label>
+                        <div class="caixa">
+                            {{form.nome}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-12 mb-2 mt-2">
+                <div class='col-12'>
+                    <div class="form-group">
+                        <label for="nome" class='mb-0'><strong style="">Tipo de Instrumento</strong></label>
+                        <div class="caixa">
+                            {{form.tipo}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkbox-container row col-12">
+                <div class="row col-12">
+                    <strong style="">Situação</strong>
+                </div>
+                <div class="row col-12 ml-3">
+                    <div class="checkbox-item col-6">
+                        <div class="">{{form.disponivel}}</div>
+                      <label for="checkbox1" class="ml-2">Disponível</label>
+                    </div>
+                
+                    <div class="checkbox-item col-6">
+                        <div>{{form.reservado}}</div>
+                      <label for="checkbox2" class="ml-2">Reservado</label>
+                    </div>
+                </div>
+                <div class="row col-12 ml-3">
+                    <div class="checkbox-item col-6">
+                        <div>{{form.emprestado}}</div>
+                      <label for="checkbox1" class="ml-2">Emprestado</label>
+                    </div>
+                
+                    <div class="checkbox-item col-6">
+                        <div>{{form.defeito}}</div>
+                      <label for="checkbox2" class="ml-2">Defeito</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-12 mb-2 mt-2 mr-5">
+                <div class='col-12 mb-0 d-flex justify-content-end '>
+                    <button type="submit" class="btn btn-primary" style="border-radius: 50px; font-size: 12px;"><strong>SALVAR</strong></button>
+                </div>
+            </div>
+        </section>
+
+    </form>
+</div>
+{% endblock %}
