@@ -61,7 +61,7 @@ a:focus {
 
 a:hover {
   text-decoration: none;
-  color: #98414A;
+  color: #008667;
 }
 
 /*---------------------------------------------*/
@@ -179,7 +179,7 @@ iframe {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 15px;
-  color: #7E121D;
+  color: #00B98E;
   line-height: 1.4;
 }
 
@@ -187,7 +187,7 @@ iframe {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 15px;
-  color: #7E121D;
+  color: #00B98E;
   line-height: 1.4;
   text-transform: uppercase;
 }
@@ -251,7 +251,7 @@ iframe {
   width: 100%;
   top: 0;
   left: 0;
-  background-color: #7E121D;
+  background-color: #00B98E;
   padding-top: 50px;
   padding-bottom: 39px;
 }
@@ -338,7 +338,7 @@ iframe {
   padding: 0 20px;
   width: 100%;
   height: 50px;
-  background-color: #7E121D;
+  background-color: #00B98E;
   border-radius: 25px;
 
   font-family: 'Poppins', sans-serif;
@@ -355,7 +355,7 @@ iframe {
 }
 
 .login100-form-btn:hover {
-  background-color: #98414A;
+  background-color: #008667;
 }
 
 

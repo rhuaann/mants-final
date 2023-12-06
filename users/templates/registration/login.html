@@ -12,12 +12,12 @@
   <form class="login" method="POST" action="{% url 'login' %}">
     {% csrf_token %}
     <div class="validate-input m-b-16 br-input" data-validate="Please enter username">
-      <div class="input-group d-flex justify-content-start align-items-center" style="width: 100%; border: 1px #7E121D solid; height: 50px; border-radius: 30px;">
+      <div class="input-group d-flex justify-content-start align-items-center" style="width: 100%; border: 1px #00B98E solid; height: 50px; border-radius: 30px;">
         <div class="ml-3">{{ form.username }}</div>
       </div>
     </div>
     <div class="validate-input m-b-16 br-input" data-validate="Please enter password">
-      <div class="input-group d-flex justify-content-start align-items-center" style="width: 100%; border: 1px #7E121D solid; height: 50px; border-radius: 30px;">
+      <div class="input-group d-flex justify-content-start align-items-center" style="width: 100%; border: 1px #00B98E solid; height: 50px; border-radius: 30px;">
         <div class="ml-3">{{ form.password }}</div>
       </div>
     </div>

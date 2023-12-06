@@ -17,7 +17,10 @@ class ReservaListView(LoginRequiredMixin, FilterView):
     template_name = "reserva/reservas.html"
 
     def get_queryset(self):
+      if not self.request.user.is_superuser:
         return Reserva.objects.filter(user=self.request.user)
+        
+      return Reserva.objects.all()
 
 class ReservaCreateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.CreateView):
   model = Reserva
