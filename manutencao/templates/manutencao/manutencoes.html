@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block title %}
+Manutenções
+{% endblock %}
+
+{% block content %}
+  <div class="mt-2">
+    
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <div>
+        <h6 style="color: black;"><strong>Manutenções</strong></h6>
+      </div>
+
+      <div>
+        <a href="{% url 'manutencao_criar' %}" class="btn btn-primary" id="bt1" style="border-radius: 50px; font-size: 12px;"><strong>Cadastrar manutenção</strong></a>
+      </div>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="table table-striped table-borderless" style="border-radius: 10px;">
+        <thead>
+          <tr class="text-center">
+            <th scope="col">Instrumento</th>
+            <th scope="col">Data de Início</th>
+            <th scope="col">Data de Conclusão</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for object in object_list %}
+            <tr class="text-center">
+              <td>{{ object.defeito.instrumento.nome }}</td>
+              <td>{{ object.data_inicio }}</td>
+              <td>{{ object.data_conclusao }}</td>
+              <td>
+                <div class="d-flex justify-content-center">
+                  <a href="{% url 'manutencao_remover' pk=object.pk %}" class=""><i class="bi bi-trash2-fill" style="color: #008667;" id="tableicon"></i></a>
+                  <a href="{% url 'manutencao_editar' pk=object.pk %}" class="ml-3"><i class="bi bi-eye-fill" style="color: #008667;" id="tableicon"></i></a>
+                </div>
+              </td>
+            </tr>
+            {% empty %}
+            <tr class="text-center">
+              <td colspan="5">
+                <p>Não existem manutenções cadastradas.</p>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <span class="br-divider my-3"></span>
+
+{% if page_obj.has_other_pages %}
+    <nav>
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">
+                        <<
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                        <
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for page_number in page_obj.paginator.page_range %}
+                {% if page_number <= page_obj.number|add:1 and page_number >= page_obj.number|add:-1 %}
+                    {% if page_obj.number == page_number %}
+                        <li class="page-item active">
+                            <a class="page-link" href="?page={{ page_number }}">
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_number }}">
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                        >
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+                        >>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+<span class="br-divider my-3"></span>
+    </div>
+  </div>
+{% endblock %}

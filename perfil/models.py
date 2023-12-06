@@ -1,8 +1,7 @@
-from django.db import models
-from users.models import User
+# from django.db import models
+# from users.models import User
+# from reserva.models import Reserva
+# from emprestimo.models import Emprestimo
 
-# Create your models here.
+# # Create your models here.
 
-class Perfil (models.Model):
-    cpf = models.CharField(max_length=50, null=True)
-    user = models.OneToOneField(User,on_delete=models.CASCADE)

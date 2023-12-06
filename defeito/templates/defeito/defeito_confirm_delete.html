@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-  <title>Deletar Stand</title>
+  <title>Deletar Defeito</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100&display=swap');
   *,
@@ -241,10 +241,10 @@
       <header class="modal-container-header">
         <h1 class="modal-container-title">
           <i class="bi bi-trash2-fill" style="color: #00B98E"></i>
-          Deletar Instrumento
+          Deletar Defeito
         </h1>
         <button class="icon-button">
-          <a href="{% url 'instrumento_listar' %}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+          <a href="{% url 'defeito_listar' %}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
             <path fill="none" d="M0 0h24v24H0z" />
             <path fill="currentColor" d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" />
           </svg></a>
@@ -255,14 +255,14 @@
         
         <section class="modal-container-body rtf">
         {% csrf_token %}
-          <p>Tem certeza que deseja excluir o instrumento "{{object.nome}}" ?</p>
+          <p>Tem certeza que deseja excluir o defeito do "{{object.instrumento}}" ?</p>
           {{ form }}
           
     
         </section>
         <footer class="modal-container-footer">
           <button class="button is-ghost">
-            <a href="{% url 'instrumento_listar' %}" style="text-decoration: none;">Não</a>
+            <a href="{% url 'defeito_listar' %}" style="text-decoration: none;">Não</a>
           </button>
           <button class="button is-primary" type="submit">Sim</button>
         </footer>

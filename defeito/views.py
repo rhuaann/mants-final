@@ -5,13 +5,16 @@ from django.views import generic
 from users.permissions import AdministradorPermission
 from .forms import DefeitoForm
 from .models import Defeito
+from django_filters.views import FilterView
 from django.shortcuts import render
 from users.models import User
-from django_filters.views import FilterView
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseBadRequest, HttpResponse
+
 
 class DefeitoListView(LoginRequiredMixin, FilterView):
     model = Defeito
-    # paginate_by=3
+    paginate_by=5
     template_name = "defeito/defeitos.html"
 
     def get_queryset(self):
@@ -20,24 +23,24 @@ class DefeitoListView(LoginRequiredMixin, FilterView):
 class DefeitoCreateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.CreateView):
   model = Defeito
   form_class = DefeitoForm
-  success_url = reverse_lazy("reserva_listar")
+  success_url = reverse_lazy("defeito_listar")
   success_message= 'Cadastrado com sucesso!'
   template_name = "defeito/form.html"
 
   def form_valid(self, form):
-        reserva = form.save(commit=False)
-        reserva.user = self.request.user  # Associando o usuário atual à reserva
-        reserva.save()
+        defeito = form.save(commit=False)
+        defeito.relatado_por = self.request.user  # Associando o usuário atual à reserva
+        defeito.save()
         return super().form_valid(form)
   
 class DefeitoDeleteView(LoginRequiredMixin, generic.DeleteView):
   model = Defeito
-  success_url = reverse_lazy("reserva_listar")
+  success_url = reverse_lazy("defeito_listar")
   template_name = "defeito/defeito_confirm_delete.html"
   
-class ReservaUpdateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.UpdateView):
+class DefeitoUpdateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.UpdateView):
   model = Defeito
   form_class = DefeitoForm
-  success_url = reverse_lazy("reserva_listar")
+  success_url = reverse_lazy("defeito_listar")
   success_message= 'Alterações salvas!'
   template_name = "defeito/form.html"

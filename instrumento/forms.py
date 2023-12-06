@@ -8,13 +8,14 @@ class InstrumentoForm(forms.ModelForm):
         fields = (
             "nome",
             "tipo",
-            "disponivel",
-            "reservado",
-            "emprestado",
-            "defeito",
+            "status",
         )
         widgets = {
             'tipo': forms.Select(attrs={
+                "class": "form-control",
+                "style": "height:45px; border:none; border-radius:10px"
+            }),
+             'status': forms.Select(attrs={
                 "class": "form-control",
                 "style": "height:45px; border:none; border-radius:10px"
             }),
@@ -26,37 +27,5 @@ class InstrumentoForm(forms.ModelForm):
         widget=forms.TextInput(attrs={
             "class": "form-control",
             "style": "height:45px; border:none; border-radius:10px"
-        })
-    )
-
-    disponivel = forms.BooleanField(
-        required=False,
-        widget=forms.CheckboxInput(attrs={
-            "class": "form-check-input",
-            "style":"width: 20px; height: 20px",
-        })
-    )
-
-    reservado = forms.BooleanField(
-        required=False,
-        widget=forms.CheckboxInput(attrs={
-            "class": "form-check-input",
-            "style":"width: 20px; height: 20px",
-        })
-    )
-
-    emprestado = forms.BooleanField(
-        required=False,
-        widget=forms.CheckboxInput(attrs={
-            "class": "form-check-input",
-            "style":"width: 20px; height: 20px",
-        })
-    )
-
-    defeito = forms.BooleanField(
-        required=False,
-        widget=forms.CheckboxInput(attrs={
-            "class": "form-check-input",
-            "style":"width: 20px; height: 20px",
         })
     )

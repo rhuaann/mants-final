@@ -5,7 +5,35 @@
 
 {% block content %}
   <div class="mt-2">
-    
+
+    <form method="GET" action="{% url 'instrumento_listar' %}" autocomplete="off" class="mb-5">
+      <section class="form container-fluid p-5x">
+        <div class="row">
+          <div class="col-12 mx-0 mt-3">
+            <div class="br-input input-inline">
+              <div class="input-content d-flex justify-content-around align-items-center">
+                <div class="input-group mr-3">
+                  {{ filter.form.nome }}
+                </div>
+                <div class="input-group mr-3">
+                  {{ filter.form.tipo }}
+                </div>
+                <div class="input-group mr-3">
+                  {{ filter.form.status }}
+                </div>
+                <div class="">
+                  <button class="btn btn-primary" type="submit" name="filtrar" style="border-radius: 50px; font-size: 12px;">
+                    <strong>Filtrar</strong>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+    </form>
+
     <div class="d-flex justify-content-between align-items-center mb-2">
       <div>
         <h6 style="color: black;"><strong>Instrumentos</strong></h6>
@@ -21,6 +49,7 @@
         <thead>
           <tr class="text-center">
             <th scope="col">Nome</th>
+            <th scope="col">Status</th>
             <th scope="col">Ações</th>
           </tr>
         </thead>
@@ -28,6 +57,17 @@
           {% for object in object_list %}
             <tr class="text-center">
               <td>{{ object.nome }}</td>
+              <td class="d-flex justify-content-center">
+                {% if object.status == 'disponivel' %}
+                  <div class="bg-success text-white" style="border-radius: 5px; width: 100px;">Disponível</div>
+                {% elif object.status == 'reservado' %}
+                  <div class="text-white" style="border-radius: 5px; width: 100px;background-color: dodgerblue;">Reservado</div>
+                {% elif object.status == 'emprestado' %}
+                  <div class="text-white" style="border-radius: 5px; width: 100px; background-color: cadetblue;">Emprestado</div>
+                {% elif object.status == 'defeito' %}
+                <div class="bg-danger text-white" style="border-radius: 5px; width: 100px;">Com defeito</div>
+                {% endif %}
+              </td>
               <td>
                 <div class="d-flex justify-content-center">
                   <a href="{% url 'instrumento_remover' pk=object.pk %}" class=""><i class="bi bi-trash2-fill" style="color: #008667;" id="tableicon"></i></a>
@@ -38,12 +78,66 @@
             {% empty %}
             <tr class="text-center">
               <td colspan="5">
-                <p>Não existem reservas cadastradas.</p>
+                <p>Não existem instrumentos cadastrados.</p>
               </td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
+
+      <span class="br-divider my-3"></span>
+
+{% if page_obj.has_other_pages %}
+    <nav>
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">
+                        <<
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                        <
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for page_number in page_obj.paginator.page_range %}
+                {% if page_number <= page_obj.number|add:1 and page_number >= page_obj.number|add:-1 %}
+                    {% if page_obj.number == page_number %}
+                        <li class="page-item active">
+                            <a class="page-link" href="?page={{ page_number }}">
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_number }}">
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                        >
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+                        >>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+<span class="br-divider my-3"></span>
     </div>
   </div>
 {% endblock %}

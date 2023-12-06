@@ -16,5 +16,5 @@ class Reserva (models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pendente', null=True, blank=True)
 
     def __str__(self):
-        return f"{self.user} reservou {self.instrumento.nome} em {self.data_reserva}"
+        return f"{self.user} reservou {self.instrumento.nome} para o dia {self.data_reserva}"
     

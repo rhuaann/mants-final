@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}
+  Cadastrar Manutenção
+{% endblock %}
+
+{% block content %}
+<div class="mt-2">
+    <form method="post" >
+        {% csrf_token %}
+        <section class='container' >
+            <div class='row col-12 mb-4'>
+                <div class='col-12'>
+                    <h5><strong style="">Cadastrar nova manutenção</strong></h5>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="row col-12 mb-2 mt-2">
+                <div class='col-12'>
+                    <div class="form-group">
+                        <label for="nome" class='mb-0'><strong style="">Defeito</strong></label>
+                        <div class="caixa">
+                            {{form.defeito}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-12 mb-2 mt-2">
+                <div class='col-12'>
+                    <div class="form-group">
+                        <label for="nome" class='mb-0'><strong style="">Data de Início</strong></label>
+                        <div class="caixa">
+                            {{form.data_inicio}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-12 mb-2 mt-2">
+                <div class='col-12'>
+                    <div class="form-group">
+                        <label for="nome" class='mb-0'><strong style="">Data de Conclusão</strong></label>
+                        <div class="caixa">
+                            {{form.data_conclusao}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-12 mb-2 mt-2">
+                <div class='col-12'>
+                    <div class="form-group">
+                        <label for="nome" class='mb-0'><strong style="">Descrição do Serviço</strong></label>
+                        <div class="caixa">
+                            {{form.descricao_servico}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
+
+            <div class="row col-12 mb-2 mt-2 mr-5">
+                <div class='col-12 mb-0 d-flex justify-content-end '>
+                    <button type="submit" class="btn btn-primary" style="border-radius: 50px; font-size: 12px;"><strong>SALVAR</strong></button>
+                </div>
+            </div>
+        </section>
+
+    </form>
+</div>
+{% endblock %}

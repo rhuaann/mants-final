@@ -41,9 +41,10 @@ class ReservaForm(forms.ModelForm):
         })
     )
 
-    data_reserva = forms.CharField(
-        widget=forms.TextInput(attrs={
-            "class": "form-control data",
+    data_reserva = forms.DateField(
+        widget=forms.DateInput(attrs={
+            "type":"date",
+            "class": "form-control",
             "style": "height:45px; border:none; border-radius:10px"
         })
     )

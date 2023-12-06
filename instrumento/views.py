@@ -5,12 +5,15 @@ from django.views import generic
 from users.permissions import AdministradorPermission
 from .forms import InstrumentoForm
 from .models import Instrumento
+from django_filters.views import FilterView
 from django.shortcuts import render
 from users.models import User
+from .filters import InstrumentoFilter
 
-class InstrumentoListView(LoginRequiredMixin, generic.ListView):
+class InstrumentoListView(LoginRequiredMixin, FilterView):
     model = Instrumento
-    # paginate_by=3
+    paginate_by=5
+    filterset_class = InstrumentoFilter
     template_name = "instrumento/instrumentos.html"
 
 

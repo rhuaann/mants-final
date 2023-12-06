@@ -1,17 +1,41 @@
 {% extends 'base.html' %}
 {% block title %}
-  Instrumentos
+  Reservas
 {% endblock %}
 
 {% block content %}
   <div class="mt-2">
     
+    <form method="GET" action="{% url 'reserva_listar' %}" autocomplete="off" class="mb-5">
+      <section class="form container-fluid p-5x">
+        <div class="row">
+          <div class="col-12 mx-0 mt-3">
+            <div class="br-input input-inline">
+              <div class="input-content d-flex justify-content-around align-items-center">
+                <div class="input-group mr-3">
+                  {{ filter.form.instrumento }}
+                </div>
+                <div class="input-group mr-3">
+                  {{ filter.form.status }}
+                </div>
+                <div class="">
+                  <button class="btn btn-primary" type="submit" name="filtrar" style="border-radius: 50px; font-size: 12px;">
+                    <strong>Filtrar</strong>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </form>
     <div class="d-flex justify-content-between align-items-center mb-2">
       <div>
         <h6 style="color: black;"><strong>Reservas</strong></h6>
       </div>
 
       <div>
+          <a href="{% url 'defeito_criar' %}" class="btn btn-primary" id="bt1" style="border-radius: 50px; font-size: 12px;"><strong>Relatar defeito</strong></a>
         <a href="{% url 'reserva_criar' %}" class="btn btn-primary" id="bt1" style="border-radius: 50px; font-size: 12px;"><strong>Reservar instrumento</strong></a>
       </div>
     </div>
@@ -31,9 +55,17 @@
           {% for object in object_list %}
             <tr class="text-center">
               {% comment %} <td>{{ object.user }}</td> {% endcomment %}
-              <td>{{ object.instrumento }}</td>
+              <td>{{ object.instrumento.nome }}</td>
               <td>{{ object.data_reserva }}</td>
-              <td>{{ object.status }}</td>
+              <td class="d-flex justify-content-center">
+                {% if object.status == 'aprovado' %}
+                  <div class="bg-success text-white" style="border-radius: 5px; width: 100px;">Aprovado</div>
+                {% elif object.status == 'pendente' %}
+                  <div class="text-white" style="border-radius: 5px; width: 100px;background-color:goldenrod;">Pendente</div>
+                {% elif object.status == 'negado' %}
+                <div class="bg-danger text-white" style="border-radius: 5px; width: 100px;">Negado</div>
+                {% endif %}
+              </td>
               <td>
                 <div class="d-flex justify-content-center">
                   <a href="{% url 'reserva_remover' pk=object.pk %}" class=""><i class="bi bi-trash2-fill" style="color: #008667;" id="tableicon"></i></a>
@@ -50,6 +82,59 @@
           {% endfor %}
         </tbody>
       </table>
+      <span class="br-divider my-3"></span>
+
+{% if page_obj.has_other_pages %}
+    <nav>
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">
+                        <<
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                        <
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for page_number in page_obj.paginator.page_range %}
+                {% if page_number <= page_obj.number|add:1 and page_number >= page_obj.number|add:-1 %}
+                    {% if page_obj.number == page_number %}
+                        <li class="page-item active">
+                            <a class="page-link" href="?page={{ page_number }}">
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_number }}">
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                        >
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+                        >>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+<span class="br-divider my-3"></span>
     </div>
   </div>
 {% endblock %}

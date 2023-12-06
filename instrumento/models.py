@@ -10,23 +10,27 @@ class Instrumento (models.Model):
         ('percussão', 'Percussão'),
     )
     tipo = models.CharField(max_length=50, choices=TIPO_CHOICES)
-    disponivel = models.BooleanField(default=True)
-    reservado = models.BooleanField(default=False)
-    emprestado = models.BooleanField(default=False)
-    defeito = models.BooleanField(default=False)
+    STATUS_CHOICES = (
+        ('disponivel', 'Disponível'),
+        ('reservado', 'Reservado'),
+        ('emprestado', 'Emprestado'),
+        ('defeito', 'Com defeito'),
+    )
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='disponivel')
+
 
     def __str__(self):
-        return self.nome
+        return f"{self.nome} | {self.status}"
 
-    def has_defeito(self):
-        return self.defeito
+    # def has_defeito(self):
+    #     return self.defeito
 
-    def registrar_defeito(self):
-        self.defeito = True
-        self.save()
+    # def registrar_defeito(self):
+    #     self.defeito = True
+    #     self.save()
 
-    def resolver_defeito(self):
-        self.defeito = False
-        self.save()
+    # def resolver_defeito(self):
+    #     self.defeito = False
+    #     self.save()
 
         

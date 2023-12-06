@@ -19,6 +19,9 @@ from django.urls import path
 
 from core.views import HomeView
 from users.views import UsersListView,UserCreateView,UsersDeleteView
+from emprestimo.views import EmprestimoCreateView,EmprestimoDeleteView,EmprestimoListView,EmprestimoUpdateView
+from manutencao.views import ManutencaoCreateView,ManutencaoDeleteView,ManutencaoListView,ManutencaoUpdateView
+from defeito.views import DefeitoListView,DefeitoCreateView,DefeitoDeleteView,DefeitoUpdateView
 from django.contrib.auth.views import LoginView,LogoutView,PasswordChangeDoneView,PasswordChangeView,PasswordContextMixin,PasswordResetCompleteView,PasswordResetConfirmView,PasswordResetDoneView,PasswordResetView
 from instrumento.views import InstrumentoCreateView,InstrumentoDeleteView,InstrumentoDetailView,InstrumentoListView,InstrumentoUpdateView
 from reserva.views import ReservaCreateView,ReservaDeleteView,ReservaUpdateView,ReservaListView
@@ -34,10 +37,25 @@ urlpatterns = [
     path('instrumento/remover/<int:pk>/',InstrumentoDeleteView.as_view(), name='instrumento_remover'),
     path('instrumento/listar/', InstrumentoListView.as_view(), name='instrumento_listar'),
 
+    path('manutencao/criar', ManutencaoCreateView.as_view(), name='manutencao_criar'),
+    path('manutencao/editar/<int:pk>/',ManutencaoUpdateView.as_view(), name='manutencao_editar'),
+    path('manutencao/remover/<int:pk>/',ManutencaoDeleteView.as_view(), name='manutencao_remover'),
+    path('manutencao/listar/', ManutencaoListView.as_view(), name='manutencao_listar'),
+
     path('reserva/criar', ReservaCreateView.as_view(), name='reserva_criar'),
     path('reserva/editar/<int:pk>/',ReservaUpdateView.as_view(), name='reserva_editar'),
     path('reserva/remover/<int:pk>/',ReservaDeleteView.as_view(), name='reserva_remover'),
     path('reserva/listar/', ReservaListView.as_view(), name='reserva_listar'),
+
+    path('emprestimo/criar', EmprestimoCreateView.as_view(), name='emprestimo_criar'),
+    path('emprestimo/editar/<int:pk>/',EmprestimoUpdateView.as_view(), name='emprestimo_editar'),
+    path('emprestimo/remover/<int:pk>/',EmprestimoDeleteView.as_view(), name='emprestimo_remover'),
+    path('emprestimo/listar/', EmprestimoListView.as_view(), name='emprestimo_listar'),
+
+    path('defeito/criar', DefeitoCreateView.as_view(), name='defeito_criar'),
+    path('defeito/editar/<int:pk>/',DefeitoUpdateView.as_view(), name='defeito_editar'),
+    path('defeito/remover/<int:pk>/',DefeitoDeleteView.as_view(), name='defeito_remover'),
+    path('defeito/listar/', DefeitoListView.as_view(), name='defeito_listar'),
 
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),

@@ -7,11 +7,13 @@ from .forms import ReservaForm
 from .models import Reserva
 from django.shortcuts import render
 from users.models import User
+from .filters import ReservaFilter
 from django_filters.views import FilterView
 
 class ReservaListView(LoginRequiredMixin, FilterView):
     model = Reserva
-    # paginate_by=3
+    paginate_by=5
+    filterset_class = ReservaFilter
     template_name = "reserva/reservas.html"
 
     def get_queryset(self):
@@ -26,7 +28,7 @@ class ReservaCreateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.C
 
   def form_valid(self, form):
         reserva = form.save(commit=False)
-        reserva.user = self.request.user  # Associando o usuário atual à reserva
+        reserva.user = self.request.user
         reserva.save()
         return super().form_valid(form)
   

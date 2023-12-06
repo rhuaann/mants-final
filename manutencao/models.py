@@ -1,19 +1,15 @@
 from django.db import models
-from instrumento.models import Instrumento
+from defeito.models import Defeito
 from users.models import User
 
 # Create your models here.
 
 class Manutencao(models.Model):
-    instrumento = models.ForeignKey(Instrumento, on_delete=models.CASCADE)
-    tecnico_responsavel = models.CharField(max_length=100)
+    defeito = models.ForeignKey(Defeito, on_delete=models.CASCADE)
+    tecnico_responsavel = models.ForeignKey(User,on_delete=models.CASCADE, null=True, blank=True)
     descricao_servico = models.TextField()
     data_inicio = models.DateField()
-    data_conclusao = models.DateField()
+    data_conclusao = models.DateField(null=True)
 
     def __str__(self):
-        return f"Manutenção em {self.instrumento.nome} resolvido em {self.data_conclusao} por {self.tecnico_responsavel}"
-
-    def resolver_defeito_associado(self):
-        if self.instrumento.defeito:
-            self.instrumento.resolver_defeito()
+        return f"{self.defeito.instrumento.nome} | {self.data_inicio} | {self.data_conclusao} | {self.tecnico_responsavel}"

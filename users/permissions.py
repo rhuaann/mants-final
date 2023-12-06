@@ -6,3 +6,10 @@ class AdministradorPermission(UserPassesTestMixin):
         if self.request.user.groups.filter(name="Administrador"):
             return True
         return False
+    
+class TecnicoPermission(UserPassesTestMixin):
+    def test_func(self):
+        if self.request.user.groups.filter(name="Tecnico"):
+            return True
+        return False
+    

@@ -5,7 +5,7 @@ from instrumento.models import Instrumento
 # Create your models here.
 
 class Emprestimo (models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     instrumento = models.ForeignKey(Instrumento, on_delete=models.CASCADE)
     data_emprestimo = models.DateField()
     data_devolucao = models.DateField()
