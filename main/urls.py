@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.urls import path
 
 from core.views import HomeView
-from users.views import UsersListView,UserCreateView,UsersDeleteView
+from users.views import UsersListView,UserCreateView,UsersDeleteView,UserUpdateView
+from perfil.views import PerfilUpdate,ProfileView
 from emprestimo.views import EmprestimoCreateView,EmprestimoDeleteView,EmprestimoListView,EmprestimoUpdateView
 from manutencao.views import ManutencaoCreateView,ManutencaoDeleteView,ManutencaoListView,ManutencaoUpdateView
 from defeito.views import DefeitoListView,DefeitoCreateView,DefeitoDeleteView,DefeitoUpdateView
@@ -69,4 +70,7 @@ urlpatterns = [
     path('users', UserCreateView.as_view(), name='users_criar'),
     path('users/listar/', UsersListView.as_view(), name='users_listar'),
     path('users/remover/<int:pk>/',UsersDeleteView.as_view(), name='users_remover'),
+    path('users/editar/<int:pk>/',UserUpdateView.as_view(), name='users_editar'),
+    path('users/profile/', ProfileView.as_view(), name='users_profile'),
+    path('profile/update/', PerfilUpdate.as_view(),name="editar_perfil"),
 ]

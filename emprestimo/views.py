@@ -8,6 +8,7 @@ from .models import Emprestimo
 from django_filters.views import FilterView
 from django.shortcuts import render
 from users.models import User
+from .filters import EmprestimoFilter
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseBadRequest, HttpResponse
 
@@ -15,6 +16,7 @@ from django.http import HttpResponseBadRequest, HttpResponse
 class EmprestimoListView(LoginRequiredMixin, FilterView):
     model = Emprestimo
     paginate_by=5
+    filterset_class = EmprestimoFilter
     template_name = "emprestimo/emprestimos.html"
 
     def get_queryset(self):
@@ -31,6 +33,9 @@ class EmprestimoCreateView(LoginRequiredMixin, views.SuccessMessageMixin, generi
         emprestimo = form.save(commit=False)
         emprestimo.user = self.request.user  # Associando o usuário atual à reserva
         emprestimo.save()
+        instrumento = form.cleaned_data['instrumento']
+        instrumento.status = 'ativo'
+        instrumento.save()
         return super().form_valid(form)
   
 class EmprestimoDeleteView(LoginRequiredMixin, generic.DeleteView):

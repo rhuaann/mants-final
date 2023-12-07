@@ -33,6 +33,9 @@ class ReservaCreateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.C
         reserva = form.save(commit=False)
         reserva.user = self.request.user
         reserva.save()
+        instrumento = form.cleaned_data['instrumento']
+        instrumento.status = 'reservado'
+        instrumento.save()
         return super().form_valid(form)
   
 class ReservaDeleteView(LoginRequiredMixin, generic.DeleteView):

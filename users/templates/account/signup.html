@@ -37,11 +37,6 @@
     {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
-    <div class="text-right p-t-13 p-b-23">
-      <span class="txt1">{% translate 'Esqueceu' %}</span>
-
-      <a class="button secondaryAction txt2" href="#">{% translate 'a senha?' %}</a>
-    </div>
 
     <div class="container-login100-form-btn">
       <button class="primaryAction br-button primary block login100-form-btn" type="submit">{% translate 'Cadastrar' %}</button>

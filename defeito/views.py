@@ -9,12 +9,14 @@ from django_filters.views import FilterView
 from django.shortcuts import render
 from users.models import User
 from django.shortcuts import get_object_or_404
+from .filters import DefeitoFilter
 from django.http import HttpResponseBadRequest, HttpResponse
 
 
 class DefeitoListView(LoginRequiredMixin, FilterView):
     model = Defeito
     paginate_by=5
+    filterset_class = DefeitoFilter
     template_name = "defeito/defeitos.html"
 
     def get_queryset(self):
@@ -31,6 +33,9 @@ class DefeitoCreateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.C
         defeito = form.save(commit=False)
         defeito.relatado_por = self.request.user  # Associando o usuário atual à reserva
         defeito.save()
+        instrumento = form.cleaned_data['instrumento']
+        instrumento.status = 'defeito'
+        instrumento.save()
         return super().form_valid(form)
   
 class DefeitoDeleteView(LoginRequiredMixin, generic.DeleteView):

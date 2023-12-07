@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}
+  Editar Perfil
+{% endblock %}
+{% block content %}
+
+<div class="mt-2">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <section class='container'>
+            <div class='row col-12 mb-4'>
+                <div class='col-12'>
+                    <h5><strong style="">Editar Perfil</strong></h5>
+                    <hr>
+                </div>
+            </div>
+            
+            <div class="row mt-2 col-12 ">
+                <div class='col-6'>
+                    <div class="form-group">
+                        <label for="nome" class='mb-0'><strong style="">Nome</strong></label>
+                        <div class="caixa">
+                            {{form.nome}}
+                        </div>
+                    </div>
+                </div>
+                <div class='col-6'>
+                    <div class="form-group">
+                        <label for="nome" class='mb-0'><strong
+                                style="">CPF</strong></label>
+                        <div class="caixa">
+                            {{form.cpf}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-12 mb-2 mt-2 mr-5">
+                <div class='col-12 mb-0 d-flex justify-content-end '>
+                    <button type="submit" class="btn btn-primary" style="border-radius: 50px; font-size: 12px;"><strong>SALVAR</strong></button>
+                </div>
+            </div>
+        </section>
+
+    </form>
+</div>
+{% endblock %}

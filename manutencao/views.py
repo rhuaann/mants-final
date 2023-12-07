@@ -8,6 +8,8 @@ from .models import Manutencao
 from django_filters.views import FilterView
 from django.shortcuts import render
 from users.models import User
+from .filters import ManutencaoFilter
+
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseBadRequest, HttpResponse
 
@@ -15,6 +17,7 @@ from django.http import HttpResponseBadRequest, HttpResponse
 class ManutencaoListView(LoginRequiredMixin, FilterView,TecnicoPermission):
     model = Manutencao
     paginate_by=5
+    filterset_class = ManutencaoFilter
     template_name = "manutencao/manutencoes.html"
 
     def get_queryset(self):
@@ -31,6 +34,9 @@ class ManutencaoCreateView(LoginRequiredMixin, views.SuccessMessageMixin, generi
         manutencao = form.save(commit=False)
         manutencao.tecnico_responsavel = self.request.user  # Associando o usuário atual à reserva
         manutencao.save()
+        defeito = form.cleaned_data['defeito']
+        defeito.status = 'resolvido'
+        defeito.save()
         return super().form_valid(form)
   
 class ManutencaoDeleteView(LoginRequiredMixin, generic.DeleteView,TecnicoPermission):

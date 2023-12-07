@@ -3,7 +3,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages import views
 from django.urls import reverse_lazy
 from django.views import generic
+from .filters import UserFilter
 from django.shortcuts import get_object_or_404
+from django_filters.views import FilterView
+from perfil.models import Perfil
 
 from .forms import UserRegistrationForm
 
@@ -16,17 +19,17 @@ class UserCreateView(views.SuccessMessageMixin, generic.CreateView):
     success_message = "Usuário cadastrado com sucesso!"
     template_name = "account/signup.html"
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context["logged_user"] = self.request.user
-    #     context["logged_user_perfil"] = self.object = get_object_or_404(Perfil,user=self.request.user)
-    #     context["users_number"] = User.objects.exclude(is_superuser=True).exclude(email="deleted").count()
+    def form_valid(self, form):
+        url = super().form_valid(form)
 
-    #     return context
+        Perfil.objects.create(usuario=self.object)
 
-class UsersListView(LoginRequiredMixin, generic.ListView):
+        return url
+
+class UsersListView(LoginRequiredMixin, FilterView):
     model = User
     paginate_by = 5
+    filterset_class = UserFilter
     ordering = ["name"]
     template_name = "users/users.html"
 
@@ -35,5 +38,9 @@ class UsersDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("users_listar")
     template_name = "users/users_confirm_delete.html"
 
-
-
+class UserUpdateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.UpdateView):
+    model = User
+    form_class = UserRegistrationForm
+    success_url = reverse_lazy("users_listar")
+    success_message = ("Usuário atualizado com sucesso!")
+    template_name = "account/signup.html"
