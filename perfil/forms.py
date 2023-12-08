@@ -11,18 +11,18 @@ class PerfilForm(forms.ModelForm):
             "cpf","nome"
         )
 
-
     cpf = forms.CharField(
         widget=forms.TextInput(attrs={
-            "class": "form-control cpf",
-            "style": "height:45px; border:none; border-radius:10px"
+            "class": "form-control",
+            "style": "height:45px; border:none; border-radius:10px;width:500px",
+            "id":"cpf"
         })
     )
 
     nome = forms.CharField(
         widget=forms.TextInput(attrs={
             "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px"
+            "style": "height:45px; border:none; border-radius:10px;width:500px"
         })
     )
 

@@ -24,7 +24,7 @@ from emprestimo.views import EmprestimoCreateView,EmprestimoDeleteView,Emprestim
 from manutencao.views import ManutencaoCreateView,ManutencaoDeleteView,ManutencaoListView,ManutencaoUpdateView
 from defeito.views import DefeitoListView,DefeitoCreateView,DefeitoDeleteView,DefeitoUpdateView
 from django.contrib.auth.views import LoginView,LogoutView,PasswordChangeDoneView,PasswordChangeView,PasswordContextMixin,PasswordResetCompleteView,PasswordResetConfirmView,PasswordResetDoneView,PasswordResetView
-from instrumento.views import InstrumentoCreateView,InstrumentoDeleteView,InstrumentoDetailView,InstrumentoListView,InstrumentoUpdateView
+from instrumento.views import InstrumentoCreateView,InstrumentoDeleteView,InstrumentoListView,InstrumentoUpdateView
 from reserva.views import ReservaCreateView,ReservaDeleteView,ReservaUpdateView,ReservaListView
 
 urlpatterns = [
@@ -33,7 +33,6 @@ urlpatterns = [
     path('',HomeView.as_view(),name='home'),
 
     path('instrumento/', InstrumentoCreateView.as_view(), name='instrumento_criar'),
-    path('instrumento/detalhe/<int:pk>/',InstrumentoDetailView.as_view(), name='instrumento_detalhe'),
     path('instrumento/editar/<int:pk>/',InstrumentoUpdateView.as_view(), name='instrumento_editar'),
     path('instrumento/remover/<int:pk>/',InstrumentoDeleteView.as_view(), name='instrumento_remover'),
     path('instrumento/listar/', InstrumentoListView.as_view(), name='instrumento_listar'),

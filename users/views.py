@@ -4,9 +4,11 @@ from django.contrib.messages import views
 from django.urls import reverse_lazy
 from django.views import generic
 from .filters import UserFilter
+from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404
 from django_filters.views import FilterView
 from perfil.models import Perfil
+from users.permissions import AdministradorPermission,TecnicoPermission
 
 from .forms import UserRegistrationForm
 
@@ -20,25 +22,31 @@ class UserCreateView(views.SuccessMessageMixin, generic.CreateView):
     template_name = "account/signup.html"
 
     def form_valid(self, form):
-        url = super().form_valid(form)
-
+        # Chamando o form_valid da superclasse para salvar o usuário
+        response = super().form_valid(form)
+        
+        # Adicionando o usuário ao grupo 'GrupoExemplo'
+        grupo = Group.objects.get(name='Usuário Regular')
+        self.object.groups.add(grupo)
+        
+        # Criando um perfil para o usuário, se necessário
         Perfil.objects.create(usuario=self.object)
+        
+        return response
 
-        return url
-
-class UsersListView(LoginRequiredMixin, FilterView):
+class UsersListView(AdministradorPermission,LoginRequiredMixin, FilterView):
     model = User
     paginate_by = 5
     filterset_class = UserFilter
     ordering = ["name"]
     template_name = "users/users.html"
 
-class UsersDeleteView(LoginRequiredMixin, generic.DeleteView):
+class UsersDeleteView(AdministradorPermission,LoginRequiredMixin, generic.DeleteView):
     model = User
     success_url = reverse_lazy("users_listar")
     template_name = "users/users_confirm_delete.html"
 
-class UserUpdateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.UpdateView):
+class UserUpdateView(AdministradorPermission,LoginRequiredMixin, views.SuccessMessageMixin, generic.UpdateView):
     model = User
     form_class = UserRegistrationForm
     success_url = reverse_lazy("users_listar")

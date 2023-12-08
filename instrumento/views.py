@@ -10,30 +10,26 @@ from django.shortcuts import render
 from users.models import User
 from .filters import InstrumentoFilter
 
-class InstrumentoListView(LoginRequiredMixin, FilterView):
+class InstrumentoListView(AdministradorPermission,LoginRequiredMixin, FilterView):
     model = Instrumento
     paginate_by=5
     filterset_class = InstrumentoFilter
     template_name = "instrumento/instrumentos.html"
 
 
-class InstrumentoDetailView(LoginRequiredMixin, generic.DetailView):
-    model = Instrumento
-    template_name = "instrumento/instrumentos_detalhe.html"
-
-class InstrumentoCreateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.CreateView):
+class InstrumentoCreateView(AdministradorPermission,LoginRequiredMixin, views.SuccessMessageMixin, generic.CreateView):
   model = Instrumento
   form_class = InstrumentoForm
   success_url = reverse_lazy("instrumento_listar")
   success_message= 'Cadastrado com sucesso!'
   template_name = "instrumento/form.html"
   
-class InstrumentoDeleteView(LoginRequiredMixin, generic.DeleteView):
+class InstrumentoDeleteView(AdministradorPermission,LoginRequiredMixin, generic.DeleteView):
   model = Instrumento
   success_url = reverse_lazy("instrumento_listar")
   template_name = "instrumento/instrumento_confirm_delete.html"
   
-class InstrumentoUpdateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.UpdateView):
+class InstrumentoUpdateView(AdministradorPermission,LoginRequiredMixin, views.SuccessMessageMixin, generic.UpdateView):
   model = Instrumento
   form_class = InstrumentoForm
   success_url = reverse_lazy("instrumento_listar")

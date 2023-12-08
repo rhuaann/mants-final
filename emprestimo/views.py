@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages import views
 from django.urls import reverse_lazy
 from django.views import generic
-from users.permissions import AdministradorPermission
+from users.permissions import UsuarioPermission
 from .forms import EmprestimoForm
 from .models import Emprestimo
 from django_filters.views import FilterView
@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseBadRequest, HttpResponse
 
 
-class EmprestimoListView(LoginRequiredMixin, FilterView):
+class EmprestimoListView(UsuarioPermission,LoginRequiredMixin, FilterView):
     model = Emprestimo
     paginate_by=5
     filterset_class = EmprestimoFilter
@@ -22,7 +22,7 @@ class EmprestimoListView(LoginRequiredMixin, FilterView):
     def get_queryset(self):
         return Emprestimo.objects.filter(user=self.request.user)
 
-class EmprestimoCreateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.CreateView):
+class EmprestimoCreateView(UsuarioPermission,LoginRequiredMixin, views.SuccessMessageMixin, generic.CreateView):
   model = Emprestimo
   form_class = EmprestimoForm
   success_url = reverse_lazy("emprestimo_listar")
@@ -34,16 +34,16 @@ class EmprestimoCreateView(LoginRequiredMixin, views.SuccessMessageMixin, generi
         emprestimo.user = self.request.user  # Associando o usuário atual à reserva
         emprestimo.save()
         instrumento = form.cleaned_data['instrumento']
-        instrumento.status = 'ativo'
+        instrumento.status = 'emprestado'
         instrumento.save()
         return super().form_valid(form)
   
-class EmprestimoDeleteView(LoginRequiredMixin, generic.DeleteView):
+class EmprestimoDeleteView(UsuarioPermission,LoginRequiredMixin, generic.DeleteView):
   model = Emprestimo
   success_url = reverse_lazy("emprestimo_listar")
   template_name = "emprestimo/emprestimo_confirm_delete.html"
   
-class EmprestimoUpdateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.UpdateView):
+class EmprestimoUpdateView(UsuarioPermission,LoginRequiredMixin, views.SuccessMessageMixin, generic.UpdateView):
   model = Emprestimo
   form_class = EmprestimoForm
   success_url = reverse_lazy("emprestimo_listar")

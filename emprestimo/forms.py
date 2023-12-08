@@ -18,7 +18,7 @@ class EmprestimoForm(forms.ModelForm):
         widgets = {
             'status': forms.Select(attrs={
                 "class": "form-control",
-                "style": "height:45px; border:none; border-radius:10px"
+                "style": "height:45px; border:none; border-radius:10px;width:500px"
             }),
         }
 
@@ -28,7 +28,7 @@ class EmprestimoForm(forms.ModelForm):
         required=True,
         widget=forms.Select(attrs={
             "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px"
+            "style": "height:45px; border:none; border-radius:10px;width:500px"
         })
     )
 
@@ -36,7 +36,7 @@ class EmprestimoForm(forms.ModelForm):
         widget=forms.DateInput(attrs={
             "type": "date",
             "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px"
+            "style": "height:45px; border:none; border-radius:10px;width:500px"
         })
     )
 
@@ -44,7 +44,7 @@ class EmprestimoForm(forms.ModelForm):
         widget=forms.DateInput(attrs={
             "type": "date",
             "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px"
+            "style": "height:45px; border:none; border-radius:10px;width:500px"
         })
     )
 

@@ -29,9 +29,13 @@ class PerfilUpdate(generic.UpdateView):
 class ProfileView(generic.ListView):
     model= User
     template_name = "registration/profile.html"
+    def get_object(self, queryset=None):
+        # Retorna o perfil do usuário logado
+        return self.request.user.usuario
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["logged_user"] = self.request.user
+        context['grupo_usuario'] = self.request.user.groups.first()
         context["logged_user_perfil"] = self.object = get_object_or_404(Perfil,usuario=self.request.user)
         context["users_number"] = User.objects.exclude(is_superuser=True).exclude(email="deleted").count()
 

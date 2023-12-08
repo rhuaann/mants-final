@@ -6,39 +6,34 @@
 {% block content %}
   <div class="mt-2">
 
-    <form method="GET" action="{% url 'instrumento_listar' %}" autocomplete="off" class="mb-5">
-      <section class="form container-fluid p-5x">
-
-          <div class="mt-3">
-            <div class="">
-              <div class="d-flex justify-content-end align-items-center">
-                <div class="mr-3">
-                  {{ filter.form.nome }}
-                </div>
-                {% comment %} <div class="input-group mr-3">
-                  {{ filter.form.tipo }}
-                </div>
-                <div class="input-group mr-3">
-                  {{ filter.form.status }}
-                </div> {% endcomment %}
-                <div class="">
-                  <button class="btn btn-primary d-flex justify-content-center align-content-center" type="submit" name="filtrar" style="border-radius: 50px;">
-                    <i class="bi bi-search mb-1"></i>
-                  </button>
+    <div class="d-flex justify-content-between align-items-center">
+      <h4 style="color: black;"><strong>Instrumentos</strong></h4>
+      <form method="GET" action="{% url 'instrumento_listar' %}" autocomplete="off" class="mb-5">
+        <section class="form container-fluid p-5x">
+  
+            <div class="mt-3">
+              <div class="">
+                <div class="d-flex justify-content-end align-items-center">
+                  <div class="mr-3">
+                    {{ filter.form.nome }}
+                  </div>
+                  <div class="">
+                    <button class="btn btn-primary d-flex justify-content-center align-content-center" type="submit" name="filtrar" style="border-radius: 50px;">
+                      <i class="bi bi-search mb-1"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-      </section>
-    </form>
+        </section>
+      </form>
+    </div>
 
-    <div class="d-flex justify-content-between align-items-center mb-2">
+    
+    <div class="d-flex justify-content-end align-items-center mb-2">
+      
       <div>
-        <h6 style="color: black;"><strong>Instrumentos</strong></h6>
-      </div>
-
-      <div>
-        <a href="{% url 'instrumento_criar' %}" class="btn btn-primary" id="bt1" style="border-radius: 50px; font-size: 12px;"><strong>Cadastrar intrumento</strong></a>
+        <a href="{% url 'instrumento_criar' %}" class="btn btn-primary" id="bt1" style="border-radius: 50px; font-size: 12px;"><strong>Cadastrar instrumento</strong></a>
       </div>
     </div>
     

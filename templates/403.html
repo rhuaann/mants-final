@@ -1,16 +1,11 @@
-{% extends "base.html" %}
-
-{% block title %}Error (403){% endblock %}
-
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  403 - Error
+{% endblock %}
 {% block content %}
-<h1>Error (403)</h1>
-
-<p>{% if exception %}{{ exception }}{% else %}Você não tem permissão para acessar esta página.{% endif %}</p>
-<div class="row justify-content-between mt-6">
-    <div class="col-lg-1 col-md-2 col-sm-3 col-12">
-        <a class="br-button block" href="{% url 'home' %}" type="button">
-            <i class="fas fa-chevron-left mr-2" aria-hidden="true"></i>Voltar
-        </a>
-    </div>
-</div>
-{% endblock content %}
+  <div class="text-center">
+      <h1 class="mb-5" style="color: #008667;"><strong>Acesso Negado</strong></h1>
+      <img class="img-fluid mt-5" src="{% static 'images/error.png' %}" width="400px" alt="">
+  </div>
+{% endblock %}

@@ -13,11 +13,11 @@ class InstrumentoForm(forms.ModelForm):
         widgets = {
             'tipo': forms.Select(attrs={
                 "class": "form-control",
-                "style": "height:45px; border:none; border-radius:10px"
+                "style": "height:45px; border:none; border-radius:10px;width:500px"
             }),
              'status': forms.Select(attrs={
                 "class": "form-control",
-                "style": "height:45px; border:none; border-radius:10px"
+                "style": "height:45px; border:none; border-radius:10px;width:500px"
             }),
         }
 
@@ -26,6 +26,6 @@ class InstrumentoForm(forms.ModelForm):
     nome = forms.CharField(
         widget=forms.TextInput(attrs={
             "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px"
+            "style": "height:45px; border:none; border-radius:10px;width:500px"
         })
     )

@@ -9,7 +9,12 @@ class AdministradorPermission(UserPassesTestMixin):
     
 class TecnicoPermission(UserPassesTestMixin):
     def test_func(self):
-        if self.request.user.groups.filter(name="Tecnico"):
+        if self.request.user.groups.filter(name="Técnico de Manutenção"):
             return True
         return False
-    
+
+class UsuarioPermission(UserPassesTestMixin):
+    def test_func(self):
+        if self.request.user.groups.filter(name="Usuário Regular"):
+            return True
+        return False

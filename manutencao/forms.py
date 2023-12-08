@@ -17,7 +17,7 @@ class ManutencaoForm(forms.ModelForm):
         widgets = {
             'descricao_servico': forms.Textarea(attrs={
                 "class": "form-control",
-                "style": "height:45px; border:none; border-radius:10px"
+                "style": "height:45px; border:none; border-radius:10px;width:500px"
             }),
         }
 
@@ -27,7 +27,7 @@ class ManutencaoForm(forms.ModelForm):
         required=True,
         widget=forms.Select(attrs={
             "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px"
+            "style": "height:45px; border:none; border-radius:10px;width:500px"
         })
     )
 
@@ -35,7 +35,7 @@ class ManutencaoForm(forms.ModelForm):
         widget=forms.DateInput(attrs={
             "type":"date",
             "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px"
+            "style": "height:45px; border:none; border-radius:10px;width:500px"
         })
     )
 
@@ -44,7 +44,7 @@ class ManutencaoForm(forms.ModelForm):
         widget=forms.DateInput(attrs={
             "type":"date",
             "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px"
+            "style": "height:45px; border:none; border-radius:10px;width:500px"
         })
     )
 

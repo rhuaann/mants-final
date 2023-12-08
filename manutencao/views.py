@@ -14,16 +14,14 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseBadRequest, HttpResponse
 
 
-class ManutencaoListView(LoginRequiredMixin, FilterView,TecnicoPermission):
+class ManutencaoListView(TecnicoPermission,LoginRequiredMixin, FilterView):
     model = Manutencao
     paginate_by=5
     filterset_class = ManutencaoFilter
     template_name = "manutencao/manutencoes.html"
 
-    def get_queryset(self):
-        return Manutencao.objects.filter(tecnico_responsavel=self.request.user)
 
-class ManutencaoCreateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.CreateView,TecnicoPermission):
+class ManutencaoCreateView(TecnicoPermission,LoginRequiredMixin, views.SuccessMessageMixin, generic.CreateView):
   model = Manutencao
   form_class = ManutencaoForm
   success_url = reverse_lazy("manutencao_listar")
@@ -34,19 +32,31 @@ class ManutencaoCreateView(LoginRequiredMixin, views.SuccessMessageMixin, generi
         manutencao = form.save(commit=False)
         manutencao.tecnico_responsavel = self.request.user  # Associando o usuário atual à reserva
         manutencao.save()
-        defeito = form.cleaned_data['defeito']
-        defeito.status = 'resolvido'
-        defeito.save()
+        
         return super().form_valid(form)
   
-class ManutencaoDeleteView(LoginRequiredMixin, generic.DeleteView,TecnicoPermission):
+class ManutencaoDeleteView(TecnicoPermission,LoginRequiredMixin, generic.DeleteView):
   model = Manutencao
   success_url = reverse_lazy("manutencao_listar")
   template_name = "manutencao/manutencao_confirm_delete.html"
   
-class ManutencaoUpdateView(LoginRequiredMixin, views.SuccessMessageMixin, generic.UpdateView,TecnicoPermission):
+class ManutencaoUpdateView(TecnicoPermission,LoginRequiredMixin, views.SuccessMessageMixin, generic.UpdateView):
   model = Manutencao
   form_class = ManutencaoForm
   success_url = reverse_lazy("manutencao_listar")
   success_message= 'Alterações salvas!'
   template_name = "manutencao/form.html"
+
+  def form_valid(self, form):
+        # Lógica padrão de validação do formulário
+        response = super().form_valid(form)
+
+        if not self.object.data_conclusao == None:
+            defeito = self.object.defeito
+            defeito.status = 'resolvido'
+            defeito.instrumento.status = 'disponivel'
+            defeito.save()
+            defeito.instrumento.save()
+
+
+        return response
