@@ -1,63 +1,81 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Perfil
+  Mants - Perfil
 {% endblock %}
+{% load static %}
 
 {% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h3 class="text-center" style="color:#008667"><strong>{{ logged_user_perfil.nome }}</strong></h3>
+        <hr />
+      </div>
+    </div>
 
-  <div class='p-3'>
-    <div class="mt-2 ">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="mt-2">
-                <h3 class="" style=""><strong>{{logged_user_perfil.nome}}
-                
-                </strong></h3>
-                {{grupo_usuario.name}}
+    <div class="d-flex flex-column align-items-center justify-content-center col-md-8 offset-md-2">
+      <div class="text-center">
+        <img class="img-fluid rounded-circle circle" src="{{ logged_user_perfil.foto_perfil.url }}" width="200px" alt="" />
+      </div>
+
+      <div class="text-center mb-2 mt-1">{{ logged_user.username }}</div>
+      <div class="text-center mb-2 mt-1">{{ grupo_usuario.name }}</div>
+      <div class="d-flex justify-content-center flex-wrap w-100">
+        {% for instrumento in instrumentos_reservados %}
+          <div class="mr-2 mb-2">
+            <div class="text-white text-center" style="border-radius: 5px; background-color: dodgerblue;">
+              <p class="m-2">{{ instrumento.nome }}</p>
             </div>
+          </div>
+        {% endfor %}
 
-            
-        </div>
-
-
-        <div class="row col-12 d-flex justify-content-between mb-4 ml-3 mt-5">
-            <div class="row col-12">
-                <div class="col-4">
-                    <div><strong style="">Nome de Usuário:</strong>
-                        <p class="">
-                            {{logged_user.username}}
-                        </p>
-                        <hr style="font-size: 40px;">
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div><strong style="">Email:</strong>
-                        <p class="">
-                            {{logged_user.email}}
-                        </p>
-                        <hr style="font-size: 40px;">
-                    </div>
-                </div>
-
-                <div class="col-4">
-                    <div><strong style="">CPF:</strong>
-                        <p class="">
-                            {{logged_user_perfil.cpf}}
-                        </p>
-                        <hr style="font-size: 40px;">
-                    </div>
-                </div>
+        {% for instrumento in instrumentos_emprestados %}
+          <div class="mr-2 mb-2">
+            <div class="text-white text-center" style="border-radius: 5px; background-color: cadetblue;">
+              <p class="m-2">{{ instrumento.nome }}</p>
             </div>
+          </div>
+        {% endfor %}
+      </div>
+      
+    </div>
 
-           
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-6 mb-4 text-center">
+            <strong style="color:#008667">Email:</strong>
+            <p>{{ logged_user.email }}</p>
+            <hr style="font-size: 20px;" />
+          </div>
+          <div class="col-md-6 mb-4 text-center">
+            <strong style="color:#008667">CPF:</strong>
+            <p>{{ logged_user_perfil.cpf }}</p>
+            <hr style="font-size: 20px;" />
+          </div>
+          <div class="col-md-6 mb-4 text-center">
+            <strong style="color:#008667">Telefone:</strong>
+            <p>{{ logged_user_perfil.telefone }}</p>
+            <hr style="font-size: 20px;" />
+          </div>
+          <div class="col-md-6 mb-4 text-center">
+            <strong style="color:#008667">Gênero:</strong>
+            <p>{{ logged_user_perfil.genero }}</p>
+            <hr style="font-size: 20px;" />
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="d-flex justify-content-end align-items-center mb-2" style="margin-top: 50vh;">
-            <div>
-                
-                <a href="{% url 'password_change' %}" class="btn btn-primary text-white" style="border-radius: 50px;" id="bt1"><strong>ALTERAR SENHA</strong></a>
-                <a href="{% url 'editar_perfil' %}" class="btn btn-primary text-white" style="border-radius: 50px;"  id="bt1"><strong>EDITAR</strong></a>
-                <a href="{% url 'logout' %}" class="btn btn-primary text-white" style="border-radius: 50px;" id="bt1"><strong>SAIR</strong></a>
-            </div>
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-8">
+        <div class="d-flex flex-wrap justify-content-center align-items-center">
+          <a href="{% url 'password_change' %}" class="btn btn-primary btn-sm text-white mx-2 mb-2" style="border-radius: 25px; min-width: 150px; background-color: #00B98E; border: none;"><strong>Alterar Senha</strong></a>
+          <a href="{% url 'editar_perfil' %}" class="btn btn-primary btn-sm text-white mx-2 mb-2" style="border-radius: 25px; min-width: 150px;background-color: #00B98E; border: none;"><strong>Editar</strong></a>
+          <a href="{% url 'logout' %}" class="btn btn-primary btn-sm text-white mx-2 mb-2" style="border-radius: 25px; min-width: 150px;background-color: #00B98E; border: none;"><strong>Sair</strong></a>
         </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

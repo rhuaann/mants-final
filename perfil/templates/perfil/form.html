@@ -1,44 +1,62 @@
 {% extends 'base.html' %}
 {% block title %}
-  Editar Perfil
+  Mants - Editar Perfil
 {% endblock %}
 {% block content %}
-
-<div class="mt-2">
+  <div class="container mt-4">
     <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <section class='container'>
-            <div class='row col-12 mb-4'>
-                <div class='col-12'>
-                    <h5><strong style="">Editar Perfil</strong></h5>
-                    <hr>
-                </div>
-            </div>
+      {% csrf_token %}
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <h3 class="text-center" style="color: #008667"><strong>Editar perfil</strong></h3>
+          <hr class="my-4" />
 
-            <div class="mb-2 mt-2">
-                <div class='text-center'>
-                    <label for="nome" class='mb-0'><strong style="">Nome</strong></label>
-                    <div class="d-flex justify-content-center">
-                        <div class="">
-                            {{form.nome}}
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <div id="miniatura" class="d-flex justify-content-center mt-3">
+            <img id="miniaturaImg" class="rounded-circle img-thumbnail circle" style="max-width: 200px; border: 3px solid #ffffff;">
+          </div>
 
-            <div class="mb-5 mt-2">
-                <div class='text-center'>
-                    <label for="nome" class='mb-0'><strong style="">CPF</strong></label>
-                    <div class="d-flex justify-content-center mb-5">
-                        <div class="">
-                            {{form.cpf}}
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-5" style="border-radius: 50px; font-size: 12px;"><strong>SALVAR</strong></button>
-                </div>
-            </div>
-        </section>
+          <div class="form-group">
+            <label for="instrumento" class="mb-0" style="color: #008667"><strong >Foto de Perfil</strong></label>
+            {{ form.foto_perfil }}
+          </div>
 
+          <div class="form-group">
+            <label for="instrumento" class="mb-0" style="color: #008667"><strong>Nome</strong></label>
+            {{ form.nome }}
+          </div>
+
+          <div class="form-group">
+            <label for="data_reserva" class="mb-0" style="color: #008667"><strong>CPF</strong></label>
+            {{ form.cpf }}
+          </div>
+
+          <div class="form-group">
+            <label for="instrumento" class="mb-0" style="color: #008667"><strong>Gênero</strong></label>
+            {{ form.genero }}
+          </div>
+
+          <div class="form-group">
+            <label for="data_reserva" class="mb-0" style="color: #008667"><strong>Telefone</strong></label>
+            {{ form.telefone }}
+          </div>
+
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary" style="border-radius: 50px; font-size: 14px;background-color:#00B98E; border: none;"><strong>SALVAR</strong></button>
+          </div>
+        </div>
+      </div>
     </form>
-</div>
+  </div>
+
+  <script>
+    function exibirMiniatura(event) {
+      var input = event.target
+      var reader = new FileReader()
+      reader.onload = function () {
+        var img = document.getElementById('miniaturaImg')
+        img.src = reader.result
+      }
+      reader.readAsDataURL(input.files[0])
+    }
+  </script>
 {% endblock %}

@@ -26,6 +26,8 @@ from defeito.views import DefeitoListView,DefeitoCreateView,DefeitoDeleteView,De
 from django.contrib.auth.views import LoginView,LogoutView,PasswordChangeDoneView,PasswordChangeView,PasswordContextMixin,PasswordResetCompleteView,PasswordResetConfirmView,PasswordResetDoneView,PasswordResetView
 from instrumento.views import InstrumentoCreateView,InstrumentoDeleteView,InstrumentoListView,InstrumentoUpdateView
 from reserva.views import ReservaCreateView,ReservaDeleteView,ReservaUpdateView,ReservaListView
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -72,4 +74,6 @@ urlpatterns = [
     path('users/editar/<int:pk>/',UserUpdateView.as_view(), name='users_editar'),
     path('users/profile/', ProfileView.as_view(), name='users_profile'),
     path('profile/update/', PerfilUpdate.as_view(),name="editar_perfil"),
-]
+
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

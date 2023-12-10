@@ -17,7 +17,7 @@ User = get_user_model()
 class UserCreateView(views.SuccessMessageMixin, generic.CreateView):
     model = User
     form_class = UserRegistrationForm
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("login")
     success_message = "Usuário cadastrado com sucesso!"
     template_name = "account/signup.html"
 

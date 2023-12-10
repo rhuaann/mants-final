@@ -17,8 +17,8 @@ class EmprestimoForm(forms.ModelForm):
         )
         widgets = {
             'status': forms.Select(attrs={
-                "class": "form-control",
-                "style": "height:45px; border:none; border-radius:10px;width:500px"
+                "style": "height: 45px;border: none;border-radius: 10px;width: 100%;",
+                "class": "form-control"
             }),
         }
 
@@ -27,24 +27,24 @@ class EmprestimoForm(forms.ModelForm):
         label="Instrumento",
         required=True,
         widget=forms.Select(attrs={
-            "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px;width:500px"
+            "style": "height: 45px;border: none;border-radius: 10px;width: 100%;",
+            "class": "form-control"
         })
     )
 
     data_emprestimo = forms.DateField(
         widget=forms.DateInput(attrs={
             "type": "date",
-            "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px;width:500px"
+            "style": "height: 45px;border: none;border-radius: 10px;width: 100%;",
+            "class": "form-control"
         })
     )
 
     data_devolucao = forms.DateField(
         widget=forms.DateInput(attrs={
             "type": "date",
-            "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px;width:500px"
+            "style": "height: 45px;border: none;border-radius: 10px;width: 100%;",
+            "class": "form-control"
         })
     )
 

@@ -1,6 +1,7 @@
 from django import forms
 from .models import Instrumento
 
+
 class InstrumentoForm(forms.ModelForm):
 
     class Meta:
@@ -12,20 +13,18 @@ class InstrumentoForm(forms.ModelForm):
         )
         widgets = {
             'tipo': forms.Select(attrs={
-                "class": "form-control",
-                "style": "height:45px; border:none; border-radius:10px;width:500px"
+                "style": "height: 45px;border: none;border-radius: 10px;width: 100%;",
+                "class": "form-control"
             }),
-             'status': forms.Select(attrs={
-                "class": "form-control",
-                "style": "height:45px; border:none; border-radius:10px;width:500px"
+            'status': forms.Select(attrs={
+                "style": "height: 45px;border: none;border-radius: 10px;width: 100%;",
+                "class": "form-control"
             }),
         }
 
-
-
     nome = forms.CharField(
         widget=forms.TextInput(attrs={
-            "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px;width:500px"
+            "style": "height: 45px;border: none;border-radius: 10px;width: 100%;",
+            "class": "form-control"
         })
     )

@@ -1,57 +1,38 @@
 {% extends 'base.html' %}
 {% block title %}
-  Cadastrar Instrumento
+Mants - Cadastrar Instrumento
 {% endblock %}
 
 {% block content %}
-<div class="mt-2">
-    <form method="post" >
-        {% csrf_token %}
-        <section class='container' >
-            <div class='row col-12 mb-4'>
-                <div class='col-12'>
-                    <h5><strong style="">Cadastrar novo instrumento</strong></h5>
-                    <hr>
-                </div>
-            </div>
 
-            <div class="mb-2 mt-2">
-                <div class='text-center'>
-                    <label for="nome" class='mb-0'><strong style="">Nome</strong></label>
-                    <div class="d-flex justify-content-center">
-                        <div class="">
-                            {{form.nome}}
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="container mt-4">
+    <form method="post">
+      {% csrf_token %}
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <h3 class="text-center" style="color: #008667"><strong>Cadastrar novo instrumento</strong></h3>
+          <hr class="my-4" />
 
-            <div class="mb-2 mt-2">
-                <div class='text-center'>
-                    <label for="nome" class='mb-0'><strong style="">Tipo</strong></label>
-                    <div class="d-flex justify-content-center">
-                        <div class="">
-                            {{form.tipo}}
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <div class="form-group">
+            <label for="instrumento" class="mb-0" style="color: #008667"><strong>Nome</strong></label>
+            {{ form.nome }}
+          </div>
 
-            <div class="mb-5 mt-2">
-                <div class='text-center'>
-                    <label for="nome" class='mb-0'><strong style="">Status</strong></label>
-                    <div class="d-flex justify-content-center mb-5">
-                        <div class="">
-                            {{form.status}}
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-5" style="border-radius: 50px; font-size: 12px;"><strong>SALVAR</strong></button>
-                </div>
-            </div>
+          <div class="form-group">
+            <label for="data_reserva" class="mb-0"style="color: #008667"><strong>Tipo de Instrumento</strong></label>
+            {{ form.tipo }}
+          </div>
 
-        
-        </section>
+          <div class="form-group">
+            <label for="data_reserva" class="mb-0"style="color: #008667"><strong>Status</strong></label>
+            {{ form.status }}
+          </div>
 
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary" style="border-radius: 50px; font-size: 14px;background-color:#00B98E; border: none;"><strong>SALVAR</strong></button>
+          </div>
+        </div>
+      </div>
     </form>
-</div>
+  </div>
 {% endblock %}

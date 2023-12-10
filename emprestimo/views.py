@@ -11,41 +11,79 @@ from users.models import User
 from .filters import EmprestimoFilter
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseBadRequest, HttpResponse
+from reserva.models import Reserva
 
 
-class EmprestimoListView(UsuarioPermission,LoginRequiredMixin, FilterView):
+class EmprestimoListView(UsuarioPermission, LoginRequiredMixin, FilterView):
     model = Emprestimo
-    paginate_by=5
+    paginate_by = 5
     filterset_class = EmprestimoFilter
     template_name = "emprestimo/emprestimos.html"
 
     def get_queryset(self):
-        return Emprestimo.objects.filter(user=self.request.user)
+        if not self.request.user.is_superuser:
+            return Emprestimo.objects.filter(user=self.request.user)
 
-class EmprestimoCreateView(UsuarioPermission,LoginRequiredMixin, views.SuccessMessageMixin, generic.CreateView):
-  model = Emprestimo
-  form_class = EmprestimoForm
-  success_url = reverse_lazy("emprestimo_listar")
-  success_message= 'Cadastrado com sucesso!'
-  template_name = "emprestimo/form.html"
+        return Emprestimo.objects.all()
 
-  def form_valid(self, form):
-        emprestimo = form.save(commit=False)
-        emprestimo.user = self.request.user  # Associando o usuário atual à reserva
-        emprestimo.save()
+
+class EmprestimoCreateView(UsuarioPermission, LoginRequiredMixin, views.SuccessMessageMixin, generic.CreateView):
+    model = Emprestimo
+    form_class = EmprestimoForm
+    success_url = reverse_lazy("emprestimo_listar")
+    success_message = 'Cadastrado com sucesso!'
+    template_name = "emprestimo/form.html"
+
+    def form_valid(self, form):
+        instrumento_reservado = form.instance.instrumento
+
+        if Reserva.objects.filter(instrumento=instrumento_reservado, status='aprovado').exists() or Emprestimo.objects.filter(instrumento=instrumento_reservado, status='ativo').exists():
+            return HttpResponse("Não é possível criar o empréstimo. O instrumento já está reservado ou emprestado.")
+
         instrumento = form.cleaned_data['instrumento']
-        instrumento.status = 'emprestado'
-        instrumento.save()
+
+        if instrumento.status == 'defeito':  # Método que verifica se o instrumento tem defeito
+            return HttpResponse("Não é possível fazer a reserva ou empréstimo. O instrumento está com defeito.")
+
+        emprestimo = form.save(commit=False)
+        emprestimo.user = self.request.user
+        emprestimo.save()
+
+        if emprestimo.status == 'ativo':
+
+            instrumento_emprestado = emprestimo.instrumento
+            instrumento_emprestado.status = 'emprestado'
+            instrumento_emprestado.save()
+        elif emprestimo.status == 'inativo':
+            instrumento_emprestado = emprestimo.instrumento
+            instrumento_emprestado.status = 'disponivel'
+            instrumento_emprestado.save()
         return super().form_valid(form)
-  
-class EmprestimoDeleteView(UsuarioPermission,LoginRequiredMixin, generic.DeleteView):
-  model = Emprestimo
-  success_url = reverse_lazy("emprestimo_listar")
-  template_name = "emprestimo/emprestimo_confirm_delete.html"
-  
-class EmprestimoUpdateView(UsuarioPermission,LoginRequiredMixin, views.SuccessMessageMixin, generic.UpdateView):
-  model = Emprestimo
-  form_class = EmprestimoForm
-  success_url = reverse_lazy("emprestimo_listar")
-  success_message= 'Alterações salvas!'
-  template_name = "emprestimo/form.html"
+
+
+class EmprestimoDeleteView(UsuarioPermission, LoginRequiredMixin, generic.DeleteView):
+    model = Emprestimo
+    success_url = reverse_lazy("emprestimo_listar")
+    template_name = "emprestimo/emprestimo_confirm_delete.html"
+
+
+class EmprestimoUpdateView(UsuarioPermission, LoginRequiredMixin, views.SuccessMessageMixin, generic.UpdateView):
+    model = Emprestimo
+    form_class = EmprestimoForm
+    success_url = reverse_lazy("emprestimo_listar")
+    success_message = 'Alterações salvas!'
+    template_name = "emprestimo/form.html"
+
+    def form_valid(self, form):
+
+        response = super().form_valid(form)
+
+        if self.object.status == 'ativo':
+            instrumento = self.object.instrumento
+            instrumento.status = 'emprestado'
+            instrumento.save()
+        elif self.object.status == 'inativo':
+            instrumento = self.object.instrumento
+            instrumento.status = 'disponivel'
+            instrumento.save()
+        return response

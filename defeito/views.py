@@ -32,9 +32,15 @@ class DefeitoCreateView(UsuarioPermission,LoginRequiredMixin, views.SuccessMessa
         defeito = form.save(commit=False)
         defeito.relatado_por = self.request.user  # Associando o usuário atual à reserva
         defeito.save()
-        instrumento = form.cleaned_data['instrumento']
-        instrumento.status = 'defeito'
-        instrumento.save()
+
+        if defeito.status == 'resolvido':
+            instrumento_defeito = defeito.instrumento
+            instrumento_defeito.status = 'disponivel'
+            instrumento_defeito.save()
+        elif defeito.status == 'pendente':
+            instrumento_defeito = defeito.instrumento
+            instrumento_defeito.status = 'defeito'
+            instrumento_defeito.save()
         return super().form_valid(form)
   
 class DefeitoDeleteView(TecnicoPermission,LoginRequiredMixin, generic.DeleteView):
@@ -48,3 +54,17 @@ class DefeitoUpdateView(TecnicoPermission,LoginRequiredMixin, views.SuccessMessa
   success_url = reverse_lazy("defeito_listar")
   success_message= 'Alterações salvas!'
   template_name = "defeito/form.html"
+
+  def form_valid(self, form):
+
+        response = super().form_valid(form)
+
+        if self.object.status == 'resolvido':
+            instrumento = self.object.instrumento
+            instrumento.status = 'disponivel'
+            instrumento.save()
+        elif self.object.status == 'pendente':
+            instrumento = self.object.instrumento
+            instrumento.status = 'defeito'
+            instrumento.save()
+        return response

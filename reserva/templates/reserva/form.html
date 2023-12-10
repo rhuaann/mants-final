@@ -1,67 +1,38 @@
 {% extends 'base.html' %}
 {% block title %}
-  Cadastrar Reserva
+Mants - Cadastrar Reserva
 {% endblock %}
 
 {% block content %}
-<div class="mt-2">
-    <form method="post" >
+<div class="container mt-4">
+    <form method="post">
         {% csrf_token %}
-        <section class='container' >
-            <div class='row col-12 mb-4'>
-                <div class='col-12'>
-                    <h5><strong style="">Cadastrar nova reserva</strong></h5>
-                    <hr>
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <h3 class="text-center" style="color: #008667"><strong>Cadastrar nova reserva</strong></h3>
+                <hr class="my-4">
+                
+                <div class="form-group">
+                    <label for="instrumento" class="mb-0"style="color: #008667"><strong>Instrumento</strong></label>
+                    {{ form.instrumento }}
+                </div>
+
+                <div class="form-group">
+                    <label for="data_reserva" class="mb-0"style="color: #008667"><strong>Data da Reserva</strong></label>
+                    {{ form.data_reserva }}
+                </div>
+
+                <div class="form-group">
+                    <label for="status" class="mb-0"style="color: #008667"><strong>Status</strong></label>
+                    {{ form.status }}
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary" style="border-radius: 50px; font-size: 14px; border:none; background-color: #00B98E;"><strong>SALVAR</strong></button>
                 </div>
             </div>
-
-            {% comment %} <div class="row col-12 mb-2 mt-2">
-                <div class='col-12'>
-                    <div class="form-group">
-                        <label for="nome" class='mb-0'><strong style="">Usuário</strong></label>
-                        <div class="caixa">
-                            {{form.user}}
-                        </div>
-                    </div>
-                </div>
-            </div> {% endcomment %}
-
-            <div class="mb-2 mt-2">
-                <div class='text-center'>
-                    <label for="nome" class='mb-0'><strong style="">Instrumento</strong></label>
-                    <div class="d-flex justify-content-center">
-                        <div class="">
-                            {{form.instrumento}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-2 mt-2">
-                <div class='text-center'>
-                    <label for="nome" class='mb-0'><strong style="">Data da Reserva</strong></label>
-                    <div class="d-flex justify-content-center">
-                        <div class="">
-                            {{form.data_reserva}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-5 mt-2">
-                <div class='text-center'>
-                    <label for="nome" class='mb-0'><strong style="">Status</strong></label>
-                    <div class="d-flex justify-content-center mb-5">
-                        <div class="">
-                            {{form.status}}
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-5" style="border-radius: 50px; font-size: 12px;"><strong>SALVAR</strong></button>
-                </div>
-            </div>
-
-        </section>
-
+        </div>
     </form>
 </div>
+
 {% endblock %}

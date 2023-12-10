@@ -17,12 +17,12 @@ class DefeitoForm(forms.ModelForm):
         )
         widgets = {
             'status': forms.Select(attrs={
-                "class": "form-control",
-                "style": "height:45px; border:none; border-radius:10px;width:500px"
+                "style": "height: 45px;border: none;border-radius: 10px;width: 100%;",
+                "class": "form-control"
             }),
             'descricao': forms.Textarea(attrs={
-                "class": "form-control",
-                "style": "height:45px; border:none; border-radius:10px;width:500px"
+                "style": "height: 45px;border: none;border-radius: 10px;width: 100%;",
+                "class": "form-control"
             }),
         }
 
@@ -31,16 +31,16 @@ class DefeitoForm(forms.ModelForm):
         label="Instrumento",
         required=True,
         widget=forms.Select(attrs={
-            "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px;width:500px"
+            "style": "height: 45px;border: none;border-radius: 10px;width: 100%;",
+            "class": "form-control"
         })
     )
 
     data_relato = forms.DateField(
         widget=forms.DateInput(attrs={
             "type": "date",
-            "class": "form-control",
-            "style": "height:45px; border:none; border-radius:10px;width:500px"
+            "style": "height: 45px;border: none;border-radius: 10px;width: 100%;",
+            "class": "form-control"
         })
     )
 

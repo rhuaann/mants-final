@@ -1,67 +1,42 @@
 {% extends 'base.html' %}
 {% block title %}
-  Cadastrar Manutenção
+  Mants - Cadastrar Manutenção
 {% endblock %}
 
 {% block content %}
-<div class="mt-2">
-    <form method="post" >
-        {% csrf_token %}
-        <section class='container' >
-            <div class='row col-12 mb-4'>
-                <div class='col-12'>
-                    <h5><strong style="">Cadastrar nova manutenção</strong></h5>
-                    <hr>
-                </div>
-            </div>
+  <div class="container mt-4">
+    <form method="post">
+      {% csrf_token %}
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <h3 class="text-center" style="color: #008667"><strong>Cadastrar nova manutenção</strong></h3>
+          <hr class="my-4" />
 
-            <div class="mb-2 mt-2">
-                <div class='text-center'>
-                    <label for="nome" class='mb-0'><strong style="">Defeito</strong></label>
-                    <div class="d-flex justify-content-center">
-                        <div class="">
-                            {{form.defeito}}
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <div class="form-group">
+            <label for="instrumento" class="mb-0"style="color: #008667"><strong>Defeito</strong></label>
+            {{ form.defeito }}
+          </div>
 
-            <div class="mb-2 mt-2">
-                <div class='text-center'>
-                    <label for="nome" class='mb-0'><strong style="">Data de Início</strong></label>
-                    <div class="d-flex justify-content-center">
-                        <div class="">
-                            {{form.data_inicio}}
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <div class="form-group">
+            <label for="data_reserva" class="mb-0"style="color: #008667"><strong>Data de Início</strong></label>
+            {{ form.data_inicio }}
+          </div>
 
-            <div class="mb-2 mt-2">
-                <div class='text-center'>
-                    <label for="nome" class='mb-0'><strong style="">Data de Conclusão</strong></label>
-                    <div class="d-flex justify-content-center">
-                        <div class="">
-                            {{form.data_conclusao}}
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <div class="form-group">
+            <label for="data_reserva" class="mb-0"style="color: #008667"><strong>Data de Conclusão</strong></label>
+            {{ form.data_conclusao }}
+          </div>
 
-            <div class="mb-5 mt-2">
-                <div class='text-center'>
-                    <label for="nome" class='mb-0'><strong style="">Descrição do Serviço</strong></label>
-                    <div class="d-flex justify-content-center mb-5">
-                        <div class="">
-                            {{form.descricao_servico}}
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-5" style="border-radius: 50px; font-size: 12px;"><strong>SALVAR</strong></button>
-                </div>
-            </div>
+          <div class="form-group">
+            <label for="data_reserva" class="mb-0"style="color: #008667"><strong>Descrição do Serviço</strong></label>
+            {{ form.descricao_servico }}
+          </div>
 
-        </section>
-
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary" style="border-radius: 50px; font-size: 14px;background-color:#00B98E; border: none;"><strong>SALVAR</strong></button>
+          </div>
+        </div>
+      </div>
     </form>
-</div>
+  </div>
 {% endblock %}
