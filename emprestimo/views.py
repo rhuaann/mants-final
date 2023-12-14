@@ -58,6 +58,10 @@ class EmprestimoCreateView(UsuarioPermission, LoginRequiredMixin, views.SuccessM
             instrumento_emprestado = emprestimo.instrumento
             instrumento_emprestado.status = 'disponivel'
             instrumento_emprestado.save()
+        elif emprestimo.status == 'pendente':
+            instrumento_emprestado = emprestimo.instrumento
+            instrumento_emprestado.status = 'disponivel'
+            instrumento_emprestado.save()
         return super().form_valid(form)
 
 
@@ -83,6 +87,10 @@ class EmprestimoUpdateView(UsuarioPermission, LoginRequiredMixin, views.SuccessM
             instrumento.status = 'emprestado'
             instrumento.save()
         elif self.object.status == 'inativo':
+            instrumento = self.object.instrumento
+            instrumento.status = 'disponivel'
+            instrumento.save()
+        elif self.object.status == 'pendente':
             instrumento = self.object.instrumento
             instrumento.status = 'disponivel'
             instrumento.save()

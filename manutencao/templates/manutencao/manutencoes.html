@@ -39,8 +39,9 @@
               <td>{{ object.data_conclusao }}</td>
               <td>
                 <div class="d-flex justify-content-center">
-                  <a href="{% url 'manutencao_remover' pk=object.pk %}" class="text-decoration-none mr-3"><i class="bi bi-trash2-fill" style="color: #00B98E;"></i></a>
+                  <a href="{% url 'manutencao_remover' pk=object.pk %}" class="text-decoration-none mr-3" data-toggle="modal" data-target="#modalExemplo-{{ object.pk }}"><i class="bi bi-trash2-fill" style="color: #00B98E;"></i></a>
                   <a href="{% url 'manutencao_editar' pk=object.pk %}" class="text-decoration-none"><i class="bi bi-eye-fill" style="color: #00B98E;"></i></a>
+                  {% include 'manutencao/manutencao_confirm_delete.html' %}
                 </div>
               </td>
             </tr>

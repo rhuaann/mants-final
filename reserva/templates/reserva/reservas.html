@@ -60,8 +60,9 @@
               </td>
               <td>
                 <div class="d-flex justify-content-center">
-                  <a href="{% url 'reserva_remover' pk=object.pk %}" class="text-decoration-none mr-3" style="border:none;"><i class="bi bi-trash2-fill" style="color: #00B98E;"></i></a>
+                  <a href="{% url 'reserva_remover' pk=object.pk %}" class="text-decoration-none mr-3" style="border:none;" data-toggle="modal" data-target="#modalExemplo-{{ object.pk }}"><i class="bi bi-trash2-fill" style="color: #00B98E;"></i></a>
                   <a href="{% url 'reserva_editar' pk=object.pk %}" class="text-decoration-none" style="border:none;"><i class="bi bi-eye-fill" style="color: #00B98E;"></i></a>
+                  {% include 'reserva/reservas_confirm_delete.html' %}
                 </div>
               </td>
             </tr>

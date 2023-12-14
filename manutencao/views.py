@@ -9,6 +9,7 @@ from django_filters.views import FilterView
 from django.shortcuts import render
 from users.models import User
 from .filters import ManutencaoFilter
+from instrumento.models import Instrumento
 
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseBadRequest, HttpResponse
@@ -29,11 +30,24 @@ class ManutencaoCreateView(TecnicoPermission,LoginRequiredMixin, views.SuccessMe
   template_name = "manutencao/form.html"
 
   def form_valid(self, form):
-        manutencao = form.save(commit=False)
-        manutencao.tecnico_responsavel = self.request.user  # Associando o usuário atual à reserva
-        manutencao.save()
-        
-        return super().form_valid(form)
+    # Lógica padrão de validação do formulário
+    response = super().form_valid(form)
+
+    # Incorporando a lógica do primeiro método
+    manutencao = form.instance
+    manutencao.tecnico_responsavel = self.request.user  # Associando o usuário atual à reserva
+    manutencao.save()
+
+    # Sua lógica adicional
+    if not manutencao.data_conclusao is None:
+        defeito = manutencao.defeito
+        defeito.status = 'resolvido'
+        defeito.instrumento.status = 'disponivel'
+        defeito.save()
+        defeito.instrumento.save()
+
+    return response
+
   
 class ManutencaoDeleteView(TecnicoPermission,LoginRequiredMixin, generic.DeleteView):
   model = Manutencao

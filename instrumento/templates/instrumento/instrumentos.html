@@ -64,8 +64,10 @@
 
               <td>
                 <div class="d-flex justify-content-center">
-                  <a href="{% url 'instrumento_remover' object.pk %}" class="text-decoration-none mr-3"><i class="bi bi-trash2-fill" style="color: #00B98E;"></i></a>
+                  <a href="{% url 'instrumento_remover' object.pk %}" class="text-decoration-none mr-3" data-toggle="modal" data-target="#modalExemplo-{{ object.pk }}"><i class="bi bi-trash2-fill" style="color: #00B98E;"></i></a>
                   <a href="{% url 'instrumento_editar' object.pk %}" class="text-decoration-none"><i class="bi bi-eye-fill" style="color: #00B98E;"></i></a>
+
+                  {% include 'instrumento/instrumento_confirm_delete.html' %}
                 </div>
               </td>
             </tr>
@@ -78,59 +80,6 @@
           {% endfor %}
         </tbody>
       </table>
-      <span class="br-divider my-3"></span>
-
-      {% if page_obj.has_other_pages %}
-          <nav>
-              <ul class="pagination justify-content-center">
-                  {% if page_obj.has_previous %}
-                      <li class="page-item">
-                          <a class="page-link" href="?page=1">
-                              <<
-                          </a>
-                      </li>
-                      <li class="page-item">
-                          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
-                              <
-                          </a>
-                      </li>
-                  {% endif %}
-      
-                  {% for page_number in page_obj.paginator.page_range %}
-                      {% if page_number <= page_obj.number|add:1 and page_number >= page_obj.number|add:-1 %}
-                          {% if page_obj.number == page_number %}
-                              <li class="page-item active">
-                                  <a class="page-link" href="?page={{ page_number }}">
-                                      {{ page_number }}
-                                  </a>
-                              </li>
-                          {% else %}
-                              <li class="page-item">
-                                  <a class="page-link" href="?page={{ page_number }}">
-                                      {{ page_number }}
-                                  </a>
-                              </li>
-                          {% endif %}
-                      {% endif %}
-                  {% endfor %}
-      
-                  {% if page_obj.has_next %}
-                      <li class="page-item">
-                          <a class="page-link" href="?page={{ page_obj.next_page_number }}">
-                              >
-                          </a>
-                      </li>
-                      <li class="page-item">
-                          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
-                              >>
-                          </a>
-                      </li>
-                  {% endif %}
-              </ul>
-          </nav>
-      {% endif %}
-      
-      <span class="br-divider my-3"></span>
     </div>
   </div>
 {% endblock %}

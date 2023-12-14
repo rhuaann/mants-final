@@ -12,8 +12,9 @@ class Emprestimo (models.Model):
     STATUS_CHOICES = (
         ('ativo', 'Ativo'),
         ('inativo', 'Inativo'),
+        ('pendente', 'Pendente'),
     )
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='ativo')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pendente')
 
     def __str__(self):
         return f"Empréstimo de {self.instrumento.nome} realizado em {self.data_emprestimo} por {self.user}"
